@@ -16,7 +16,6 @@ public class Task {
     @Id
     private String id;
     private String description;
-    private LocalDateTime taskDate;
     private boolean completed;
 
 }

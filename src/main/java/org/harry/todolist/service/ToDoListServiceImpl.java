@@ -21,16 +21,20 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
-        validate(createTaskRequest.getDescription(),createTaskRequest.getId());
-        task.setDescription(createTaskRequest.getDescription());
-        task.setTaskDate(createTaskRequest.getTaskDate());
-        task.setId(createTaskRequest.getId());
-        return toDoListRepo.save(task);
+        if(validate(createTaskRequest.getDescription(),createTaskRequest.getId())) {
+            ;
+            task.setDescription(createTaskRequest.getDescription());
+            task.setId(createTaskRequest.getId());
+            return toDoListRepo.save(task);
+        }
+        else{
+            throw new NullPointerException("description or id exist already");
+        }
     }
     public boolean validate(String description,String id){
         for (Task task: toDoListRepo.findAll()){
-            if (task.getDescription().equalsIgnoreCase(description) && task.getId().equals(id)){
-                throw new NullPointerException("description exist already");
+            if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
+                throw new NullPointerException("description or id exist already");
             }
         }
         return true;
@@ -78,7 +82,6 @@ public class ToDoListServiceImpl implements ToDoListService {
         Task task = (findTaskById(updateTaskRequest.getId()) != null) ? findTaskById(updateTaskRequest.getId()) : findByDescription(updateTaskRequest.getOldDescription());
         if (task.getDescription().equalsIgnoreCase(updateTaskRequest.getOldDescription())) {
             task.setDescription(updateTaskRequest.getNewDescription());
-            task.setTaskDate(updateTaskRequest.getTaskDate());
             toDoListRepo.save(task);
             return task;
         }else{

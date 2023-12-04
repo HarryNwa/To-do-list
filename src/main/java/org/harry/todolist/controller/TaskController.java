@@ -5,28 +5,24 @@ import org.harry.todolist.model.Task;
 import org.harry.todolist.repo.ToDoListRepo;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/v1")
 @RestController
 public class TaskController {
     @Autowired
     private ToDoListService toDoListService;
-    @Autowired
-    private ToDoListRepo toDoListRepo;
 
 
     @PostMapping("/task")
-    public Task createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
+    public Object createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
         try {
-            return toDoListService.createNewTask(createTaskRequest);
+            return toDoListService.createNewTask(createTaskRequest) + toDoListService.getCurrentFormattedDateTime();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return "description or id already exist";
         }
 
     }
+
 
 }

@@ -10,6 +10,5 @@ public class CreateTaskRequest {
     @Id
     private String id;
     private String description;
-    private LocalDateTime taskDate;
     private boolean completed;
 }
