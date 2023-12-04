@@ -1,6 +1,7 @@
 package org.harry.todolist.controller;
 
 import org.harry.todolist.dto.CreateTaskRequest;
+import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
 import org.harry.todolist.repo.ToDoListRepo;
 import org.harry.todolist.service.ToDoListService;
@@ -12,13 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/api/v1/")
 @RestController
+@RequestMapping("/api/v1/")
 public class TaskController {
     @Autowired
     private ToDoListService toDoListService;
-    @Autowired
-    private ToDoListRepo toDoListRepo;
 
 
     @PostMapping("/task")
@@ -48,9 +47,9 @@ public class TaskController {
         }
     }
     @PostMapping("/update")
-    public String updateTask(CreateTaskRequest createTaskRequest){
+    public String updateTask(UpdateTaskRequest updateTaskRequest){
         try {
-            String update = String.valueOf(toDoListService.updateTask(createTaskRequest));
+            String update = String.valueOf(toDoListService.updateTask(updateTaskRequest));
             return "Your task has been updated to " + update;
         } catch (Exception e) {
             throw new RuntimeException(e);
