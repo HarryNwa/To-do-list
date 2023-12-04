@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequestMapping("/api/v1/")
 @RestController
 public class TaskController {
@@ -26,7 +28,43 @@ public class TaskController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
+    @PostMapping("/find")
+    public String findTaskById(String id){
+        try {
+            String id1 = String.valueOf(toDoListService.findTaskById(id));
+            return "Your task id is " + id1;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PostMapping("/findAll")
+    public List<Task> findAllCompletedTask(){
+        try {
+            return  toDoListService.findAllCompletedTask();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PostMapping("/update")
+    public String updateTask(CreateTaskRequest createTaskRequest){
+        try {
+            String update = String.valueOf(toDoListService.updateTask(createTaskRequest));
+            return "Your task has been updated to " + update;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @PostMapping()
+    public String findByDescription(String description){
+        try {
+           String describe = String.valueOf(toDoListService.findByDescription(description));
+           return "Your task description is found to be " + describe;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
