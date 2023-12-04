@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(todo.jpeg);
+    background-size: 1500px;   
+    background-position-x: center;
+    background-position-y: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: left;
+    font-size: larger;
+    color: #131111;
+    text-decoration: rgb(248, 244, 242);
+    text-justify: auto;
+}
+
+
+ul {
+    list-style-type: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    padding: 0px;
+}
+
+li {
+    background-color: #e7dfdf;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+}
+
+li button {
+    background-color: #da182b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.createdAt {
+    font-size: 0.8em;
+    color: #888;
+}

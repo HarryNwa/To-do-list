@@ -39,7 +39,9 @@ class ToDoListApplicationTests {
 		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5,
 				8, 0, 0));
 		createTaskRequest.setId("1");
-
+		task.setDescription(createTaskRequest.getDescription());
+		task.setTaskDate(createTaskRequest.getTaskDate());
+		task.setId(createTaskRequest.getId());
 		toDoListService.createNewTask(createTaskRequest);
 		assertThat(toDoListRepo.count(), is(1L));
 
