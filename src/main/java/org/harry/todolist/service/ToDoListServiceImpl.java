@@ -22,7 +22,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         Task task = new Task();
         task.setDescription(createTaskRequest.getDescription());
         task.setTaskDate(createTaskRequest.getTaskDate());
-//        task.setId(createTaskRequest.getId());
+        task.setId(createTaskRequest.getId());
         return toDoListRepo.save(task);
     }
     @Override
