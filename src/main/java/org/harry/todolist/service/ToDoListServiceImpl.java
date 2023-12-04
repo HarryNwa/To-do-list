@@ -1,6 +1,7 @@
 package org.harry.todolist.service;
 
 import org.harry.todolist.dto.CreateTaskRequest;
+import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
 import org.harry.todolist.repo.ToDoListRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,19 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
+        validate(createTaskRequest.getDescription(),createTaskRequest.getId());
         task.setDescription(createTaskRequest.getDescription());
         task.setTaskDate(createTaskRequest.getTaskDate());
-//        task.setId(createTaskRequest.getId());
+        task.setId(createTaskRequest.getId());
         return toDoListRepo.save(task);
+    }
+    public boolean validate(String description,String id){
+        for (Task task: toDoListRepo.findAll()){
+            if (task.getDescription().equalsIgnoreCase(description) && task.getId().equals(id)){
+                throw new NullPointerException("description exist already");
+            }
+        }
+        return true;
     }
     @Override
     public String getCurrentFormattedDateTime() {
@@ -42,12 +52,17 @@ public class ToDoListServiceImpl implements ToDoListService {
             return toDoListRepo.save(task.get());
 
         }
-        return null;
+        return task.get();
     }
 
     @Override
     public List<Task> findAllCompletedTask() {
         return toDoListRepo.findAll();
+    }
+
+    @Override
+    public long count() {
+        return toDoListRepo.count();
     }
 
     @Override
@@ -59,12 +74,16 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public Task updateTask(CreateTaskRequest createTaskRequest) {
-        Task newTask = new Task();
-        newTask.setDescription(createTaskRequest.getDescription());
-        newTask.setTaskDate(createTaskRequest.getTaskDate());
-        toDoListRepo.save(newTask);
-        return newTask;
+    public Task updateTask(UpdateTaskRequest updateTaskRequest) {
+        Task task = (findTaskById(updateTaskRequest.getId()) != null) ? findTaskById(updateTaskRequest.getId()) : findByDescription(updateTaskRequest.getOldDescription());
+        if (task.getDescription().equalsIgnoreCase(updateTaskRequest.getOldDescription())) {
+            task.setDescription(updateTaskRequest.getNewDescription());
+            task.setTaskDate(updateTaskRequest.getTaskDate());
+            toDoListRepo.save(task);
+            return task;
+        }else{
+            throw new NullPointerException("not found");
+        }
     }
 
     @Override
@@ -76,6 +95,6 @@ public class ToDoListServiceImpl implements ToDoListService {
         if (task.get().getDescription().equals(description)) {
             return toDoListRepo.save(task.get());
         }
-        return null;
+        return task.get();
     }
 }
