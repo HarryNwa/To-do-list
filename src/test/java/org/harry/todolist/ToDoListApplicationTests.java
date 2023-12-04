@@ -36,7 +36,7 @@ class ToDoListApplicationTests {
 
 		task.setDescription(createTaskRequest.getDescription());
 		task.setTaskDate(createTaskRequest.getTaskDate());
-//		task.setId(createTaskRequest.getId());
+		task.setId(createTaskRequest.getId());
 		toDoListService.createNewTask(createTaskRequest);
 
 		assertThat(toDoListRepo.count(), is(1L));
