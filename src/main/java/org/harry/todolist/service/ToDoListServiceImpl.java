@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,9 +23,13 @@ public class ToDoListServiceImpl implements ToDoListService {
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
         if(validate(createTaskRequest.getDescription(),createTaskRequest.getId())) {
-            ;
             task.setDescription(createTaskRequest.getDescription());
             task.setId(createTaskRequest.getId());
+            task.setTaskTime(createTaskRequest.getTaskDate());
+            if (createTaskRequest.isCompleted()) {
+                task.setCompleted(true);
+                task.setCompletionDateTime(LocalDateTime.now());
+            }
             return toDoListRepo.save(task);
         }
         else{
@@ -53,10 +58,11 @@ public class ToDoListServiceImpl implements ToDoListService {
             throw new RuntimeException("Id not found");
         }
         if (task.get().getId().equals(id)) {
-            return toDoListRepo.save(task.get());
+            toDoListRepo.save(task.get());
+            return task.get();
 
         }
-        return task.get();
+      return null;
     }
 
     @Override
@@ -82,6 +88,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         Task task = (findTaskById(updateTaskRequest.getId()) != null) ? findTaskById(updateTaskRequest.getId()) : findByDescription(updateTaskRequest.getOldDescription());
         if (task.getDescription().equalsIgnoreCase(updateTaskRequest.getOldDescription())) {
             task.setDescription(updateTaskRequest.getNewDescription());
+            task.setTaskTime(updateTaskRequest.getTaskDate());
             toDoListRepo.save(task);
             return task;
         }else{
@@ -98,6 +105,13 @@ public class ToDoListServiceImpl implements ToDoListService {
         if (task.get().getDescription().equals(description)) {
             return toDoListRepo.save(task.get());
         }
-        return task.get();
+        return null;
+    }
+
+    @Override
+    public boolean isTaskComplete(String description) {
+        Task task = findByDescription(description);
+        return task.getCompletionDateTime() != null && (task.getCompletionDateTime().isEqual(task.getTaskTime()) ||
+                Objects.requireNonNull(task.getCompletionDateTime()).isAfter(task.getTaskTime()));
     }
 }

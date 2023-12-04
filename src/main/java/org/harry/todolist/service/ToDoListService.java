@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ToDoListService {
-//    Optional<Task> findById(String task);
     Task createNewTask(CreateTaskRequest createTaskRequest);
 
     String getCurrentFormattedDateTime();
@@ -23,4 +22,5 @@ public interface ToDoListService {
 
 //    Task findById(Long id);
     Task findByDescription(String description);
+    boolean isTaskComplete(String description);
 }
