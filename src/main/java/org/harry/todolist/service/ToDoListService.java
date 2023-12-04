@@ -1,6 +1,7 @@
 package org.harry.todolist.service;
 
 import org.harry.todolist.dto.CreateTaskRequest;
+import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
 
 import java.time.LocalDateTime;
@@ -14,10 +15,11 @@ public interface ToDoListService {
     String getCurrentFormattedDateTime();
     Task findTaskById(String id);
     List<Task> findAllCompletedTask();
+    long count();
 
     void deleteTask(String id);
 
-    Task updateTask(CreateTaskRequest createTaskRequest);
+    Task updateTask(UpdateTaskRequest updateTaskRequest);
 
 //    Task findById(Long id);
     Task findByDescription(String description);
