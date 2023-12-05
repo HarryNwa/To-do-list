@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class UpdateTaskRequest {
     @Id
     private String id;
+    private LocalDateTime taskDate;
     private String oldDescription;
     private String newDescription;
-    private LocalDateTime taskDate;
-    private boolean completed;
+    private LocalDateTime completionDate;
 }

@@ -1,0 +1,51 @@
+body {
+    background-image: url("./asset/todo.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.add {
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    text-align: center;
+    gap: 50px;
+    margin: 0px;
+}
+
+.todo {
+    color: #333;
+}
+
+.taskInput,
+.updateInput{
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.searchBtn,
+.editBtn{
+
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 50px;
+}
+.searchBtn:hover, .editBtn:hover {
+    background-color: #45a049;
+}
+
+
+.resultContainer {
+    margin-top: 20px;
+}

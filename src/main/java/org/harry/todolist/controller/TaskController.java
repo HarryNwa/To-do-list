@@ -3,7 +3,6 @@ package org.harry.todolist.controller;
 import org.harry.todolist.dto.CreateTaskRequest;
 import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
-import org.harry.todolist.repo.ToDoListRepo;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +17,21 @@ public class TaskController {
 
 
     @PostMapping("/task")
-    public Task createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
+    public Object createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
         try {
-            return toDoListService.createNewTask(createTaskRequest);
+            return toDoListService.createNewTask(createTaskRequest) + toDoListService.getCurrentFormattedDateTime();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return "description or id already exist";
         }
     }
     @GetMapping("/find")
-    public String findTaskById(@RequestBody String id){
+    public Object findTaskById(@RequestBody String id){
         try {
-            String id1 = String.valueOf(toDoListService.findTaskById(id));
-            return "Your task id is " + id1;
+//            String id1 = String.valueOf(toDoListService.findTaskById(id));
+            return toDoListService.findTaskById(id);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+//            return "not found";
+            return e.getMessage();
         }
     }
     @GetMapping("/findAll")
@@ -44,21 +44,21 @@ public class TaskController {
         }
     }
     @PostMapping("/update")
-    public String updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
+    public Task updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
         try {
-            String update = String.valueOf(toDoListService.updateTask(updateTaskRequest));
-            return "Your task has been updated to " + update;
+//            String update = String.valueOf(toDoListService.updateTask(updateTaskRequest));
+            return toDoListService.updateTask(updateTaskRequest);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new NullPointerException(e.getMessage());
         }
     }
-    @GetMapping("/describe")
-    public String findByDescription(@RequestBody String description){
+    @GetMapping("/findByDescription")
+    public Task findByDescription(String description){
         try {
-           String describe = String.valueOf(toDoListService.findByDescription(description));
-           return "Your task description is found to be " + describe;
+//           String describe = String.valueOf(toDoListService.findByDescription(description));
+           return toDoListService.findByDescription(description);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

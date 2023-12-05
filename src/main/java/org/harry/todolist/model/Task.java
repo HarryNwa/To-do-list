@@ -15,8 +15,10 @@ import java.time.LocalDateTime;
 public class Task {
     @Id
     private String id;
+    private LocalDateTime taskTime;
     private String description;
-    private LocalDateTime taskDate;
-    private boolean completed;
+    private LocalDateTime completionDateTime;
+
+
 
 }

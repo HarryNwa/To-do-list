@@ -1,0 +1,36 @@
+
+body {
+    background-image: url("./asset/pexels-darina-belonogova-8385377.jpg");
+    background-position: center;
+
+
+
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 50px;
+    margin: auto;
+}
+
+
+.main a img {
+    width: 100px;
+    height: auto;
+}
+
+
+.main a {
+    margin: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
