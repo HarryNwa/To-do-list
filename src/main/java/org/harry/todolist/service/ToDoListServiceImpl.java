@@ -1,5 +1,6 @@
 package org.harry.todolist.service;
 
+import lombok.NonNull;
 import org.harry.todolist.dto.CreateTaskRequest;
 import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,14 +26,26 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
-        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
+
+        validate(createTaskRequest.getDescription(),createTaskRequest.getId());
         task.setDescription(createTaskRequest.getDescription());
         task.setId(createTaskRequest.getId());
         task.setTaskTime(createTaskRequest.getTaskDate());
-        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
-        getCurrentFormattedDateTime();
+        task.setCompletionDateTime(LocalDateTime.now());
 
         return toDoListRepo.save(task);
+
+//        else{
+//            throw new NullPointerException("description or id exist already");
+//        }
+//        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
+//        task.setDescription(createTaskRequest.getDescription());
+//        task.setId(createTaskRequest.getId());
+//        task.setTaskTime(createTaskRequest.getTaskDate());
+//        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
+//        getCurrentFormattedDateTime();
+//
+//        return toDoListRepo.save(task);
 
     }
 

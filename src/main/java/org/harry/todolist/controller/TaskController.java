@@ -27,10 +27,8 @@ public class TaskController {
     @GetMapping("/find")
     public Object findTaskById(@RequestBody String id){
         try {
-//            String id1 = String.valueOf(toDoListService.findTaskById(id));
             return toDoListService.findTaskById(id);
         } catch (Exception e) {
-//            return "not found";
             return e.getMessage();
         }
     }
@@ -46,7 +44,6 @@ public class TaskController {
     @PostMapping("/update")
     public Task updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
         try {
-//            String update = String.valueOf(toDoListService.updateTask(updateTaskRequest));
             return toDoListService.updateTask(updateTaskRequest);
         } catch (Exception e) {
             throw new NullPointerException(e.getMessage());
@@ -55,7 +52,6 @@ public class TaskController {
     @GetMapping("/findByDescription")
     public Task findByDescription(String description){
         try {
-//           String describe = String.valueOf(toDoListService.findByDescription(description));
            return toDoListService.findByDescription(description);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
