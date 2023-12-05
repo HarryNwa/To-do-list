@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="update..css">
-
 </head>
-    <body>
-        <div class="add">
-            <h1 class="todo"> Update To-Do List</h1>
-            <input type="text" class="taskInput" placeholder="Search by description">
-            <button class="addBtn">Search</button>
-
-        </div>
+<body>
+<div class="update">
+    <h1 class="todo">Update To-Do List</h1>
+    <input type="text" class="taskInput" placeholder="Search by description">
+    <button class="searchBtn" onclick="searchAndUpdate()">Search</button>
 
 
-    </body>
+    <div class="resultContainer" style="display: none;">
+        <input type="text" class="updateInput" placeholder="Enter updated text">
+        <button class="editBtn" onclick="editTask()">Edit</button>
+    </div>
+</div>
+
+
+</body>
 </html>
