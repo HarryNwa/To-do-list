@@ -22,25 +22,21 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
-        if(validate(createTaskRequest.getDescription(),createTaskRequest.getId())) {
-            task.setDescription(createTaskRequest.getDescription());
-            task.setId(createTaskRequest.getId());
-            task.setTaskTime(createTaskRequest.getTaskDate());
-            task.setCompletionDateTime(LocalDateTime.now());
+        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
+        task.setDescription(createTaskRequest.getDescription());
+        task.setId(createTaskRequest.getId());
+        task.setTaskTime(createTaskRequest.getTaskDate());
+        task.setCompletionDateTime(LocalDateTime.now());
 
-            return toDoListRepo.save(task);
-        }
-        else{
-            throw new NullPointerException("description or id exist already");
-        }
+        return toDoListRepo.save(task);
+
     }
-    public boolean validate(String description,String id){
+    public void validate(String description,String id){
         for (Task task: toDoListRepo.findAll()){
             if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
                 throw new NullPointerException("description or id exist already");
             }
         }
-        return true;
     }
     @Override
     public String getCurrentFormattedDateTime() {
