@@ -3,12 +3,14 @@ package org.harry.todolist.service;
 import org.harry.todolist.dto.CreateTaskRequest;
 import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
+import org.harry.todolist.repo.CompletedTaskRepo;
 import org.harry.todolist.repo.ToDoListRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class ToDoListServiceImpl implements ToDoListService {
     @Autowired
     private ToDoListRepo toDoListRepo;
+    @Autowired
+    CompletedTaskRepo completedTaskRepo;
 
 
     @Override
@@ -26,14 +30,14 @@ public class ToDoListServiceImpl implements ToDoListService {
         task.setDescription(createTaskRequest.getDescription());
         task.setId(createTaskRequest.getId());
         task.setTaskTime(createTaskRequest.getTaskDate());
-        task.setCompletionDateTime(LocalDateTime.now());
+        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
+        getCurrentFormattedDateTime();
 
         return toDoListRepo.save(task);
 
     }
 
     public void validate(String description,String id){
-    public void validate(String description, String id){
         for (Task task: toDoListRepo.findAll()){
             if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
                 throw new NullPointerException("description or id exist already");
@@ -63,8 +67,21 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public List<Task> findAllCompletedTask() {
-        return toDoListRepo.findAll();
-    }
+        List <Task> allTask;
+        allTask = completedTaskRepo.findAll();
+//        List <Task> completedTask = new ArrayList<>();
+//        for (Task task : allTask){
+//            if (isTaskComplete(task.getDescription())){
+               return allTask;
+
+            }
+//        }
+//        if (!completedTask.isEmpty()) {
+//            return completedTask;
+//        } else {
+//            throw new RuntimeException("No completed tasks found");
+//        }
+//    }
 
     @Override
     public long count() {
@@ -114,11 +131,12 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public boolean isTaskComplete(String description) {
         Task task = findByDescription(description);
-        LocalDateTime taskDate = task.getTaskTime();
         LocalDateTime completed = task.getCompletionDateTime();
         if (task.getCompletionDateTime() != null){
-            if(completed.isAfter(taskDate)){
+            if(completed.isBefore(LocalDateTime.now())){
+                completedTaskRepo.save(task);
                return true;
+
             }
         }
         return false;
