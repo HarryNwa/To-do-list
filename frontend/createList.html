@@ -11,12 +11,16 @@
     <div class="homeDiv">
         <a href="index.html">
             <img src="./asset/icons8-home-ios-16-filled/icons8-home-500.png" alt="home">
-            <p class="home">Home</p>
+
         </a>
     </div>
     <div class="add">
         <h1 class="todo">To-Do List</h1>
         <input id="input" type="text" class="taskInput" placeholder="Add a new task">
+       <p class="start">Date to start task </p>
+        <input id="inputT" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
+        <p class="start">Date to end task</p>
+        <input id="inputE" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
         <button type="button" class="addBtn" onclick="createTodoList()">ADD</button>
 
     </div>
