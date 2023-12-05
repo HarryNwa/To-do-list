@@ -19,7 +19,7 @@ public class TaskController {
     @PostMapping("/task")
     public Object createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
         try {
-            return toDoListService.createNewTask(createTaskRequest) + toDoListService.getCurrentFormattedDateTime();
+            return toDoListService.createNewTask(createTaskRequest);
         } catch (Exception e) {
             return "description or id already exist";
         }
@@ -55,6 +55,24 @@ public class TaskController {
            return toDoListService.findByDescription(description);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
+        }
+    }
+    @DeleteMapping("/delete")
+    public String deleteTask(String id){
+        try{
+            toDoListService.deleteTask(id);
+            return "deleted successfully";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+    @DeleteMapping("/deleteByDescription")
+    public String deleteTaskByDescription(String description){
+        try{
+            toDoListService.deleteByDescription(description);
+            return "deleted successfully";
+        }catch (Exception e){
+            return e.getMessage();
         }
     }
 
