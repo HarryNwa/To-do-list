@@ -26,10 +26,8 @@ public class ToDoListServiceImpl implements ToDoListService {
             task.setDescription(createTaskRequest.getDescription());
             task.setId(createTaskRequest.getId());
             task.setTaskTime(createTaskRequest.getTaskDate());
-            if (createTaskRequest.isCompleted()) {
-                task.setCompleted(true);
-                task.setCompletionDateTime(LocalDateTime.now());
-            }
+            task.setCompletionDateTime(LocalDateTime.now());
+
             return toDoListRepo.save(task);
         }
         else{
@@ -111,7 +109,13 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public boolean isTaskComplete(String description) {
         Task task = findByDescription(description);
-        return task.getCompletionDateTime() != null && (task.getCompletionDateTime().isEqual(task.getTaskTime()) ||
-                Objects.requireNonNull(task.getCompletionDateTime()).isAfter(task.getTaskTime()));
+        LocalDateTime taskDate = task.getTaskTime();
+        LocalDateTime completed = task.getCompletionDateTime();
+        if (task.getCompletionDateTime() != null){
+            if(completed.isAfter(taskDate)){
+               return true;
+            }
+        }
+        return false;
     }
 }

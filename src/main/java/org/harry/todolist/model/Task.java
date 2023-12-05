@@ -17,7 +17,6 @@ public class Task {
     private String id;
     private LocalDateTime taskTime;
     private String description;
-    private boolean completed;
     private LocalDateTime completionDateTime;
 
 
