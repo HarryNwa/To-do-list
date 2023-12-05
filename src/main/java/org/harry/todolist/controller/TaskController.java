@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/")
 public class TaskController {
@@ -20,7 +21,8 @@ public class TaskController {
     @PostMapping("/task")
     public Object createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
         try {
-            return toDoListService.createNewTask(createTaskRequest) + toDoListService.getCurrentFormattedDateTime();
+
+            return toDoListService.createNewTask(createTaskRequest);
         } catch (Exception e) {
             return "description or id already exist";
         }

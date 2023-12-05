@@ -28,7 +28,9 @@ public class ToDoListServiceImpl implements ToDoListService {
             task.setTaskTime(createTaskRequest.getTaskDate());
             task.setCompletionDateTime(LocalDateTime.now());
 
-            return toDoListRepo.save(task);
+            Task task1 =  toDoListRepo.save(task);
+            System.out.println("Task saved");
+            return task1;
         }
         else{
             throw new NullPointerException("description or id exist already");
