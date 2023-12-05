@@ -31,7 +31,9 @@ public class ToDoListServiceImpl implements ToDoListService {
         return toDoListRepo.save(task);
 
     }
+
     public void validate(String description,String id){
+    public void validate(String description, String id){
         for (Task task: toDoListRepo.findAll()){
             if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
                 throw new NullPointerException("description or id exist already");
@@ -75,7 +77,6 @@ public class ToDoListServiceImpl implements ToDoListService {
         if (task.getId().equals(id)) {
             toDoListRepo.delete(task);
         }
-
     }
 
     @Override
