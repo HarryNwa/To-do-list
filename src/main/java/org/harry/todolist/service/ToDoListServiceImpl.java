@@ -67,21 +67,20 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public List<Task> findAllCompletedTask() {
-        List <Task> allTask;
-        allTask = completedTaskRepo.findAll();
-//        List <Task> completedTask = new ArrayList<>();
-//        for (Task task : allTask){
-//            if (isTaskComplete(task.getDescription())){
-               return allTask;
+        List <Task> allTask = toDoListRepo.findAll();
+        List <Task> completedTask = new ArrayList<>();
+        for (Task task : allTask){
+            if (isTaskComplete(task.getDescription())){
+                completedTask.add(task);
 
             }
-//        }
-//        if (!completedTask.isEmpty()) {
-//            return completedTask;
-//        } else {
-//            throw new RuntimeException("No completed tasks found");
-//        }
-//    }
+        }
+        if (!completedTask.isEmpty()) {
+            return completedTask;
+        } else {
+            throw new RuntimeException("No completed tasks found");
+        }
+    }
 
     @Override
     public long count() {
@@ -134,7 +133,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         LocalDateTime completed = task.getCompletionDateTime();
         if (task.getCompletionDateTime() != null){
             if(completed.isBefore(LocalDateTime.now())){
-                completedTaskRepo.save(task);
+//                toDoListRepo.save(task);
                return true;
 
             }
