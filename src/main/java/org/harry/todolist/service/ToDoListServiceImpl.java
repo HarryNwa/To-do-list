@@ -34,13 +34,12 @@ public class ToDoListServiceImpl implements ToDoListService {
             throw new NullPointerException("description or id exist already");
         }
     }
-    public boolean validate(String description,String id){
+    public void validate(String description, String id){
         for (Task task: toDoListRepo.findAll()){
             if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
                 throw new NullPointerException("description or id exist already");
             }
         }
-        return true;
     }
     @Override
     public String getCurrentFormattedDateTime() {
@@ -78,7 +77,6 @@ public class ToDoListServiceImpl implements ToDoListService {
         if (findTaskById(id).getId().equals(id)) {
             toDoListRepo.delete(findTaskById(id));
         }
-
     }
 
     @Override

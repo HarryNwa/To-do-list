@@ -3,7 +3,6 @@ package org.harry.todolist.controller;
 import org.harry.todolist.dto.CreateTaskRequest;
 import org.harry.todolist.dto.UpdateTaskRequest;
 import org.harry.todolist.model.Task;
-import org.harry.todolist.repo.ToDoListRepo;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,7 @@ public class TaskController {
             return e.getMessage();
         }
     }
-    @PostMapping("/findAll")
+    @GetMapping("/findAll")
     public List<Task> findAllCompletedTask(){
         try {
             return  toDoListService.findAllCompletedTask();
@@ -62,6 +61,7 @@ public class TaskController {
             throw new RuntimeException(e.getMessage());
         }
     }
+
 
 
 }
