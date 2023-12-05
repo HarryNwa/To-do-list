@@ -75,10 +75,18 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public void deleteTask(String id) {
-        if (findTaskById(id).getId().equals(id)) {
-            toDoListRepo.delete(findTaskById(id));
+        Task task = findTaskById(id);
+        if (task.getId().equals(id)) {
+            toDoListRepo.delete(task);
         }
 
+    }
+
+    @Override
+    public void deleteByDescription(String description) {
+        Task task = findByDescription(description);
+        if (task.getDescription().equalsIgnoreCase(description))
+            toDoListRepo.delete(task);
     }
 
     @Override

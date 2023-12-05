@@ -62,6 +62,24 @@ public class TaskController {
             throw new RuntimeException(e.getMessage());
         }
     }
+    @DeleteMapping("/delete")
+    public String deleteTask(String id){
+        try{
+            toDoListService.deleteTask(id);
+            return "deleted successfully";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+    @DeleteMapping("/deleteByDescription")
+    public String deleteTaskByDescription(String description){
+        try{
+            toDoListService.deleteByDescription(description);
+            return "deleted successfully";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
 
 
 }
