@@ -18,6 +18,8 @@ public interface ToDoListService {
 
     void deleteTask(String id);
 
+    void deleteByDescription(String description);
+
     Task updateTask(UpdateTaskRequest updateTaskRequest);
 
 //    Task findById(Long id);

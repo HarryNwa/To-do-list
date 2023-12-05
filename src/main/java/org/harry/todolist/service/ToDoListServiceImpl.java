@@ -22,18 +22,17 @@ public class ToDoListServiceImpl implements ToDoListService {
     @Override
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
-        if(validate(createTaskRequest.getDescription(),createTaskRequest.getId())) {
-            task.setDescription(createTaskRequest.getDescription());
-            task.setId(createTaskRequest.getId());
-            task.setTaskTime(createTaskRequest.getTaskDate());
-            task.setCompletionDateTime(LocalDateTime.now());
+        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
+        task.setDescription(createTaskRequest.getDescription());
+        task.setId(createTaskRequest.getId());
+        task.setTaskTime(createTaskRequest.getTaskDate());
+        task.setCompletionDateTime(LocalDateTime.now());
 
-            return toDoListRepo.save(task);
-        }
-        else{
-            throw new NullPointerException("description or id exist already");
-        }
+        return toDoListRepo.save(task);
+
     }
+
+    public void validate(String description,String id){
     public void validate(String description, String id){
         for (Task task: toDoListRepo.findAll()){
             if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
@@ -74,9 +73,17 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public void deleteTask(String id) {
-        if (findTaskById(id).getId().equals(id)) {
-            toDoListRepo.delete(findTaskById(id));
+        Task task = findTaskById(id);
+        if (task.getId().equals(id)) {
+            toDoListRepo.delete(task);
         }
+    }
+
+    @Override
+    public void deleteByDescription(String description) {
+        Task task = findByDescription(description);
+        if (task.getDescription().equalsIgnoreCase(description))
+            toDoListRepo.delete(task);
     }
 
     @Override
