@@ -23,13 +23,15 @@ body {
     color: #333;
 }
 
-.taskInput {
+.taskInput,
+.updateInput{
     width: 90%;
     padding: 10px;
     margin-top: 10px;
 }
 
-.addBtn {
+.searchBtn,
+.editBtn{
 
     background-color: #4CAF50;
     color: white;
@@ -38,4 +40,12 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 50px;
+}
+.searchBtn:hover, .editBtn:hover {
+    background-color: #45a049;
+}
+
+
+.resultContainer {
+    margin-top: 20px;
 }
