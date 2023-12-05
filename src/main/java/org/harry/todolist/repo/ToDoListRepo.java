@@ -7,7 +7,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface ToDoListRepo extends MongoRepository<Task, String> {
-    Optional<Task> findTaskById(String id);
+    
 
     Optional<Task> findTaskByDescription(String description);
+
+    Optional<Task> findTaskById(String id);
 }

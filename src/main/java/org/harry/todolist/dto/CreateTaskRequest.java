@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 public class CreateTaskRequest {
     @Id
     private String id;
-    private String description;
     private LocalDateTime taskDate;
+    private String description;
     private boolean completed;
+    private LocalDateTime completionDate;
 }
