@@ -6,10 +6,7 @@ import org.harry.todolist.model.Task;
 import org.harry.todolist.repo.ToDoListRepo;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,8 +25,8 @@ public class TaskController {
             throw new RuntimeException(e);
         }
     }
-    @PostMapping("/find")
-    public String findTaskById(String id){
+    @GetMapping("/find")
+    public String findTaskById(@RequestBody String id){
         try {
             String id1 = String.valueOf(toDoListService.findTaskById(id));
             return "Your task id is " + id1;
@@ -37,7 +34,7 @@ public class TaskController {
             throw new RuntimeException(e);
         }
     }
-    @PostMapping("/findAll")
+    @GetMapping("/findAll")
     public List<Task> findAllCompletedTask(){
         try {
             return  toDoListService.findAllCompletedTask();
@@ -47,7 +44,7 @@ public class TaskController {
         }
     }
     @PostMapping("/update")
-    public String updateTask(UpdateTaskRequest updateTaskRequest){
+    public String updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
         try {
             String update = String.valueOf(toDoListService.updateTask(updateTaskRequest));
             return "Your task has been updated to " + update;
@@ -55,8 +52,8 @@ public class TaskController {
             throw new RuntimeException(e);
         }
     }
-    @PostMapping()
-    public String findByDescription(String description){
+    @GetMapping("/describe")
+    public String findByDescription(@RequestBody String description){
         try {
            String describe = String.valueOf(toDoListService.findByDescription(description));
            return "Your task description is found to be " + describe;
@@ -64,6 +61,7 @@ public class TaskController {
             throw new RuntimeException(e);
         }
     }
+
 
 
 }
