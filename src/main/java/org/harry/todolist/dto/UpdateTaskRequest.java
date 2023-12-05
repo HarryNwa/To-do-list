@@ -11,6 +11,5 @@ public class UpdateTaskRequest {
     private LocalDateTime taskDate;
     private String oldDescription;
     private String newDescription;
-    private boolean completed;
     private LocalDateTime completionDate;
 }
