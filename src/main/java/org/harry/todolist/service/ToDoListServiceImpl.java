@@ -29,7 +29,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
         task.setDescription(createTaskRequest.getDescription());
         task.setId(createTaskRequest.getId());
-        task.setTaskTime(createTaskRequest.getTaskDate());
+        task.setTaskTime(LocalDateTime.now());
         task.setCompletionDateTime(createTaskRequest.getCompletionDate());
         getCurrentFormattedDateTime();
 

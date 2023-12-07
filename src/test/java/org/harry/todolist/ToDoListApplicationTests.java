@@ -92,12 +92,12 @@ class ToDoListApplicationTests {
 	@Test
 	public void updateTask(){
 		createTaskRequest.setDescription("Lecture by 8am");
-		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5,
-				8, 0, 0));
+		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5, 8, 0, 0));
 		createTaskRequest.setId("1");
 		task.setId(createTaskRequest.getId());
 		toDoListService.createNewTask(createTaskRequest);
 		assertEquals("Lecture by 8am",toDoListService.findByDescription("Lecture by 8am").getDescription());
+
 		updateTaskRequest.setOldDescription("Lecture by 8am");
 		updateTaskRequest.setNewDescription("Lecture by 10am");
 		updateTaskRequest.setId("1");
@@ -111,17 +111,18 @@ class ToDoListApplicationTests {
 	@Test
 	public void deleteTaskById(){
 		createTaskRequest.setDescription("Lecture by 8am");
-		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5,
-				8, 0, 0));
+		createTaskRequest.setTaskDate(LocalDateTime.now());
 		Task task = toDoListService.createNewTask(createTaskRequest);
 		assertThat(toDoListRepo.count(), is(1L));
+
 		createTaskRequest.setDescription("Lecture by 10am");
-		createTaskRequest.setTaskDate (LocalDateTime.of(2023, 12, 5,
-				8, 0, 0));
+		createTaskRequest.setTaskDate (LocalDateTime.now());
 		Task task1 = toDoListService.createNewTask(createTaskRequest);
 		assertThat(toDoListService.count(),is(2L) );
+
 		toDoListService.deleteTask(task.getId());
 		assertThat(toDoListRepo.count(), is(1L));
+
 		toDoListService.deleteTask(task1.getId());
 		assertThat(toDoListRepo.count(), is(0L));
 
@@ -131,7 +132,7 @@ class ToDoListApplicationTests {
 	@Test
 	public void confirmIfCompleted(){
 		createTaskRequest.setDescription("Lecture by 8am");
-		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5, 8, 15, 0));
+		createTaskRequest.setTaskDate(LocalDateTime.now());
 		createTaskRequest.setCompletionDate(LocalDateTime.of(2023, 12, 5, 10, 37, 0));
 		toDoListService.createNewTask(createTaskRequest);
 		assertEquals("Lecture by 8am",toDoListService.findByDescription("Lecture by 8am").getDescription());
@@ -143,17 +144,24 @@ class ToDoListApplicationTests {
 		createTaskRequest.setDescription("Lecture by 8am");
 		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5, 8, 15, 0));
 		createTaskRequest.setCompletionDate(LocalDateTime.of(2023, 12, 5, 9, 37, 0));
-		toDoListService.createNewTask(createTaskRequest);
+		Task task2 = toDoListService.createNewTask(createTaskRequest);
+		assertNotNull(task2.getId());
+		System.out.println(task2.getId());
+
 
 		createTaskRequest.setDescription("Meeting by 2pm");
 		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5, 14, 0, 0));
 		createTaskRequest.setCompletionDate(LocalDateTime.of(2023, 12, 5, 12, 30, 0));
-		toDoListService.createNewTask(createTaskRequest);
+		Task task1 = toDoListService.createNewTask(createTaskRequest);
+		assertNotNull(task1.getId());
+		System.out.println(task1.getId());
 
 		createTaskRequest.setDescription("Shopping by 6pm");
 		createTaskRequest.setTaskDate(LocalDateTime.of(2023, 12, 5, 18, 0, 0));
 		createTaskRequest.setCompletionDate(LocalDateTime.of(2023, 12, 5, 11, 0, 0));
-		toDoListService.createNewTask(createTaskRequest);
+		Task task3 = toDoListService.createNewTask(createTaskRequest);
+		assertNotNull(task3.getId());
+		System.out.println(task3.getId());
 
 		List<Task> completedTasks = toDoListService.findAllCompletedTask();
 		assertThat(completedTasks.size(), is(3));
