@@ -13,7 +13,6 @@ function createTodoList() {
     };
 
     const createUrl = "http://localhost:8080/api/v1/task";
-
     fetch(createUrl, {
         method: 'POST',
         headers: {
@@ -22,15 +21,21 @@ function createTodoList() {
         body: JSON.stringify(data)
     })
         .then(response => {
-            console.log("i got here")
+            console.log("Response received");
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             return response.json();
         })
         .then(data => {
+            console.log("Data from server:", data);
             let {id, description, completedDateTime, taskTime} = data;
-
-            console.log(description, id, completedDateTime, taskTime);
             console.log("Success!", data);
             console.log("You have successfully added a new task");
             inputElement.value = '';
         })
+        .catch(error => {
+                console.error("Fetch error:", error);
+            });
 }
+
