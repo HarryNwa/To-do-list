@@ -28,13 +28,13 @@ public class ToDoListServiceImpl implements ToDoListService {
             task.setTaskTime(createTaskRequest.getTaskDate());
             task.setCompletionDateTime(LocalDateTime.now());
 
-            Task task1 =  toDoListRepo.save(task);
-            System.out.println("Task saved");
-            return task1;
+             toDoListRepo.save(task);
+
         }
         else{
             throw new NullPointerException("description or id exist already");
         }
+        return task;
     }
     public boolean validate(String description,String id){
         for (Task task: toDoListRepo.findAll()){
