@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CompletedTaskRepo extends MongoRepository<Task, String> {
 
+    Optional<Task> findByCompletedTask(String completedTask);
 }

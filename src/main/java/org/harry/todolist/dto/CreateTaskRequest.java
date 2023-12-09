@@ -12,4 +12,5 @@ public class CreateTaskRequest {
     private LocalDateTime taskDate;
     private String description;
     private LocalDateTime completionDate;
+    private String completedTask;
 }

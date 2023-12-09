@@ -18,6 +18,7 @@ public class Task {
     private LocalDateTime taskTime;
     private String description;
     private LocalDateTime completionDateTime;
+    private String completedTask;
 
 
 
