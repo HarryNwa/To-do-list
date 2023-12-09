@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="createList.css">
-    <script src="index.js"></script>
-
+    <script src="index.js" defer></script>
 </head>
 <body>
     <div class="homeDiv">
@@ -26,6 +25,8 @@
         <input id="inputE" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
         <button type="button" class="addBtn" onclick="createTodoList()">ADD</button>
 
+        <input type="text" class="taskInput" placeholder="Add a new task">
+        <button class="addBtn" onclick="createNewTask">ADD</button>
 
     </div>
 
