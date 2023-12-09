@@ -38,7 +38,7 @@ public class TaskController {
         }
     }
     @GetMapping("/findAll")
-    public List<Task> findAllCompletedTask(){
+    public Iterable<Task> findAllCompletedTask(){
         try {
             return  toDoListService.findAllCompletedTask();
 
