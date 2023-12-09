@@ -1,3 +1,60 @@
+/*body {*/
+/*    background-image: url("./asset/pexels-tima-miroshnichenko-6913186.jpg");*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.add {*/
+/*    background-color: white;*/
+/*    width: 500px;*/
+/*    padding: 20px;*/
+/*    text-align: center;*/
+/*    gap: 50px;*/
+/*    margin: 0px;*/
+/*}*/
+
+/*.todo {*/
+/*    color: #333;*/
+/*}*/
+
+/*.taskInput {*/
+/*    width: 90%;*/
+/*    padding: 10px;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.addBtn {*/
+
+/*    background-color: #4CAF50;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*    margin-top: 50px;*/
+/*}*/
+/*.homeDiv a {*/
+/*    margin: 40px;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*    padding: 10px;*/
+/*    border-radius: 8px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.homeDiv a img {*/
+/*    width: 60px;*/
+/*    height: auto;*/
+/*}*/
+
 body {
     background-image: url("./asset/pexels-tima-miroshnichenko-6913186.jpg");
     background-position: center;
@@ -30,7 +87,6 @@ body {
 }
 
 .addBtn {
-
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -39,3 +95,24 @@ body {
     cursor: pointer;
     margin-top: 50px;
 }
+
+.homeDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 40px;
+}
+
+.homeDiv a {
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.homeDiv a img {
+    width: 60px;
+    height: auto;
+}
+

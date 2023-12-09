@@ -23,6 +23,28 @@ body {
     color: #333;
 }
 
+.homeDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 40px;
+}
+
+.homeDiv a {
+
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.homeDiv a img {
+    width: 60px;
+    height: auto;
+}
+
+
 .taskInput,
 .updateInput{
     width: 90%;

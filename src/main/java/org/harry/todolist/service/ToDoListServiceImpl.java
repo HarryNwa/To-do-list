@@ -27,6 +27,7 @@ public class ToDoListServiceImpl implements ToDoListService {
     public Task createNewTask(CreateTaskRequest createTaskRequest) {
         Task task = new Task();
 
+        toDoListRepo.save(task);
         validate(createTaskRequest.getDescription(),createTaskRequest.getId());
         task.setDescription(createTaskRequest.getDescription());
         task.setId(createTaskRequest.getId());
