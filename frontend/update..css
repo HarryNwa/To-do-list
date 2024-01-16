@@ -66,8 +66,11 @@ body {
 .searchBtn:hover, .editBtn:hover {
     background-color: #45a049;
 }
-
-
-.resultContainer {
-    margin-top: 20px;
+.add {
+    background-color: white;
+    width: 550px;
+    padding: 20px;
+    text-align: center;
+    gap: 50px;
+    margin: 0px;
 }

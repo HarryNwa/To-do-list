@@ -1,8 +1,9 @@
 package org.harry.todolist.controller;
 
-import org.harry.todolist.dto.CreateTaskRequest;
-import org.harry.todolist.dto.UpdateTaskRequest;
-import org.harry.todolist.model.Task;
+import org.harry.todolist.dto.request.CreateTaskRequest;
+import org.harry.todolist.dto.request.UpdateTaskRequest;
+import org.harry.todolist.data.model.Task;
+import org.harry.todolist.dto.respond.ApiRespond;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,22 +12,21 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class TaskController {
     @Autowired
     private ToDoListService toDoListService;
 
 
-    @PostMapping("/task")
-    public Object createNewTask(@RequestBody CreateTaskRequest createTaskRequest){
-        try {
-<<<<<<< HEAD
 
-=======
->>>>>>> c9d8c88f535ade9133a727c2cc61e2aa4161484b
-            return toDoListService.createNewTask(createTaskRequest);
+    @PostMapping("/task")
+    public ApiRespond<Object> createNewTask(@RequestBody CreateTaskRequest createTaskRequest) {
+        System.out.println("Received payload: " + createTaskRequest.toString());
+        try {
+            Task createdTask = toDoListService.createNewTask(createTaskRequest);
+            return new ApiRespond<>(createdTask);
         } catch (Exception e) {
-            return "description or id already exist";
+            return new ApiRespond<>(e.getMessage());
         }
     }
     @GetMapping("/find")
@@ -54,14 +54,7 @@ public class TaskController {
             throw new NullPointerException(e.getMessage());
         }
     }
-    @GetMapping("/findByDescription")
-    public Task findByDescription(String description){
-        try {
-           return toDoListService.findByDescription(description);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
+
     @DeleteMapping("/delete")
     public String deleteTask(String id){
         try{
@@ -84,3 +77,4 @@ public class TaskController {
 
 
 }
+

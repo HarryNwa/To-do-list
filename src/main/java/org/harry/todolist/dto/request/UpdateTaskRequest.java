@@ -1,4 +1,4 @@
-package org.harry.todolist.dto;
+package org.harry.todolist.dto.request;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
