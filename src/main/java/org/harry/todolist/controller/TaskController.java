@@ -7,10 +7,10 @@ import org.harry.todolist.dto.respond.ApiRespond;
 import org.harry.todolist.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:63342")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1")
 public class TaskController {
@@ -29,6 +29,18 @@ public class TaskController {
             return new ApiRespond<>(e.getMessage());
         }
     }
+    @GetMapping("/findByDescription")
+    public ApiRespond<Object> findByDescription(String description){
+        try {
+            Task task = toDoListService.findByDescription(description);
+            return new ApiRespond<>(task);
+
+        }catch (Exception e) {
+            return new ApiRespond<>(e.getMessage());
+
+        }
+    }
+
     @GetMapping("/find")
     public Object findTaskById(@RequestBody String id){
         try {
@@ -37,21 +49,35 @@ public class TaskController {
             return e.getMessage();
         }
     }
-    @GetMapping("/findAll")
-    public List<Task> findAllCompletedTask(){
+    @GetMapping("/getAllTask")
+    public ApiRespond<Object> getAllTask(@RequestParam(defaultValue = "0") int page,
+                                         @RequestParam(defaultValue = "10") int pageSize) {
         try {
-            return  toDoListService.findAllCompletedTask();
+            List<Task> tasks = toDoListService.getAllTasks(page, pageSize);
+            return new ApiRespond<>(tasks);
+        } catch (Exception e) {
+            return new ApiRespond<>(e.getMessage());
+        }
+    }
+
+
+    @GetMapping("/findAll")
+    public ApiRespond<Task> findAllCompletedTask(){
+        try {
+            Task task = (Task) toDoListService.findAllCompletedTask();
+            return new ApiRespond<>(task);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
     @PostMapping("/update")
-    public Task updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
+    public ApiRespond<Object> updateTask(@RequestBody UpdateTaskRequest updateTaskRequest){
         try {
-            return toDoListService.updateTask(updateTaskRequest);
+           Task updateTask = toDoListService.updateTask(updateTaskRequest);
+            return new ApiRespond<>(updateTask);
         } catch (Exception e) {
-            throw new NullPointerException(e.getMessage());
+            return new ApiRespond<>(e.getMessage());
         }
     }
 
@@ -65,12 +91,14 @@ public class TaskController {
         }
     }
     @DeleteMapping("/deleteByDescription")
-    public String deleteTaskByDescription(String description){
+    public ApiRespond<String> deleteTaskByDescription(String description){
         try{
-            toDoListService.deleteByDescription(description);
-            return "deleted successfully";
+          toDoListService.deleteByDescription(description);
+          String task = "Task has been deleted successfully";
+          return new ApiRespond<>(task);
+
         }catch (Exception e){
-            return e.getMessage();
+            return new ApiRespond<>(e.getMessage());
         }
     }
 

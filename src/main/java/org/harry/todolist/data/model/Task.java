@@ -27,14 +27,6 @@ public class Task {
 
 
     }
-    public String getTaskTime(){
-        if(taskTime != null){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'Time' hh:mm a");
-            return formatter.format(taskTime);
-
-        }
-        return null;
-    }
 
 
 

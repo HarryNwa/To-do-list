@@ -7,11 +7,12 @@ import org.harry.todolist.data.model.Task;
 import java.util.List;
 
 public interface ToDoListService {
+   List <Task> getAllTasks(int page, int pageSize);
     Task createNewTask(CreateTaskRequest createTaskRequest);
 
     String getCurrentFormattedDateTime();
     Task findTaskById(String id);
-//    List<Task> findAllCompletedTask();
+
     long count();
 
     void deleteTask(String id);

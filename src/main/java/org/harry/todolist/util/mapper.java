@@ -2,6 +2,7 @@ package org.harry.todolist.util;
 
 import org.harry.todolist.dto.request.CreateTaskRequest;
 import org.harry.todolist.data.model.Task;
+import org.harry.todolist.dto.request.UpdateTaskRequest;
 
 public class mapper {
 
@@ -17,5 +18,15 @@ public class mapper {
 
         return task;
     }
+    public static Task map(UpdateTaskRequest updateTaskRequest, Task existingTask) {
+
+        existingTask.setDescription(updateTaskRequest.getNewDescription());
+        existingTask.setTaskTime(updateTaskRequest.getTaskDate());
+        existingTask.setCompletionDate(updateTaskRequest.getCompletionDate());
+        existingTask.setCompletedTask(updateTaskRequest.getCompletedTask());
+
+        return existingTask;
+    }
+
 
 }

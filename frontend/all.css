@@ -1,5 +1,8 @@
+/*@import url('https://fonts.cdnfonts.com/css/isabella');*/
+@import url('https://fonts.cdnfonts.com/css/tracing-blood');
 body {
-    background-image: url("./asset/todo.jpeg");
+    /*background-color: black;*/
+    /*background-image: url("./asset/todo.jpeg");*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -20,7 +23,12 @@ body {
 }
 
 .todo {
-    color: #333;
+    font-family: 'Tracing Blood', sans-serif;
+
+    /*font-family: 'Isabella', sans-serif;*/
+    font-size: 50px;
+    color: steelblue;
+
 }
 
 .homeDiv {
@@ -54,8 +62,8 @@ body {
 
 .searchBtn,
 .editBtn{
-
-    background-color: #4CAF50;
+    background-color: #888888;
+    /*background-color: #4CAF50;*/
     color: white;
     padding: 10px 20px;
     border: none;
@@ -73,4 +81,42 @@ body {
     text-align: center;
     gap: 50px;
     margin: 0px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.confirm-btn, .cancel-btn {
+    background-color: #888888;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.confirm-btn:hover{
+    background-color: red;
+
+
+}
+.cancel-btn:hover {
+    background-color: #45a049;
+
 }

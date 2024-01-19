@@ -6,6 +6,8 @@ import org.harry.todolist.data.model.Task;
 import org.harry.todolist.data.repo.CompletedTaskRepo;
 import org.harry.todolist.data.repo.ToDoListRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,22 +29,7 @@ public class ToDoListServiceImpl implements ToDoListService {
     public Task createNewTask(CreateTaskRequest createTaskRequest)  {
         validate(createTaskRequest.getDescription());
         return toDoListRepo.save(map(createTaskRequest));
-     
 
-
-
-
-//        else{
-//            throw new NullPointerException("description or id exist already");
-//        }
-//        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
-//        task.setDescription(createTaskRequest.getDescription());
-//        task.setId(createTaskRequest.getId());
-//        task.setTaskTime(createTaskRequest.getTaskDate());
-//        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
-//        getCurrentFormattedDateTime();
-//
-//        return toDoListRepo.save(task);
 
     }
 
@@ -51,11 +38,6 @@ public class ToDoListServiceImpl implements ToDoListService {
             throw new RuntimeException("Task description exist already");
 
         }
-//        for (Task task: toDoListRepo.findAll()){
-//            if (task.getDescription().equalsIgnoreCase(description) || task.getId().equals(id)){
-//                throw new RuntimeException("description or id exist already");
-//            }
-//        }
     }
     @Override
     public String getCurrentFormattedDateTime() {
@@ -84,9 +66,6 @@ public class ToDoListServiceImpl implements ToDoListService {
         if (allTask.isEmpty()){
             throw new RuntimeException("Task not found. Task either never created or not completed");
         }
-////        if (allTask.get().getCompletedTask().equals(createTaskRequest.getCompletedTask())) {
-//            return completedTaskRepo.save(allTask.get());
-//        }
                return allTask;
 
     }
@@ -113,16 +92,20 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public Task updateTask(UpdateTaskRequest updateTaskRequest) {
-        Task task = (findTaskById(updateTaskRequest.getId()) != null) ? findTaskById(updateTaskRequest.getId()) : findByDescription(updateTaskRequest.getOldDescription());
-        if (task.getDescription().equalsIgnoreCase(updateTaskRequest.getOldDescription())) {
-            task.setDescription(updateTaskRequest.getNewDescription());
-            task.setTaskTime(updateTaskRequest.getTaskDate());
-            toDoListRepo.save(task);
-            return task;
-        }else{
-            throw new NullPointerException("not found");
-        }
+        Task existingTask = findByDescription(updateTaskRequest.getOldDescription());
+
+        return toDoListRepo.save(map(updateTaskRequest, existingTask));
     }
+
+
+    @Override
+    public List<Task> getAllTasks(int page, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        Page<Task> taskPage = toDoListRepo.findAll(pageRequest);
+        return taskPage.getContent();
+    }
+
+
 
     @Override
     public Task findByDescription(String description) {
@@ -131,7 +114,7 @@ public class ToDoListServiceImpl implements ToDoListService {
             throw new RuntimeException("Task not found. Task either completed or never created");
         }
 
-            return task.get();
+        return task.get();
 
 
     }
