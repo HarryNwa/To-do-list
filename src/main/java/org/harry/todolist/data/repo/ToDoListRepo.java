@@ -1,7 +1,6 @@
-package org.harry.todolist.repo;
+package org.harry.todolist.data.repo;
 
-import com.mongodb.client.MongoDatabase;
-import org.harry.todolist.model.Task;
+import org.harry.todolist.data.model.Task;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

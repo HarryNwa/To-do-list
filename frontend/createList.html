@@ -4,32 +4,35 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="createList.css">
-    <script src="index.js" defer></script>
+    <script src="index.js"></script>
 </head>
 <body>
-    <div class="homeDiv">
-        <a href="index.html">
-            <img src="./asset/icons8-home-ios-16-filled/icons8-home-500.png" alt="home">
+<div class="homeDiv">
+    <a href="index.html">
+        <img src="./asset/icons8-home-ios-16-filled/icons8-home-500.png" alt="home">
+    </a>
+</div>
+<div class="add">
+    <h1 class="todo">TaskForge</h1>
+    <p class="intro">LIST OF TASK</p>
+    <table id="todoList">
+        <thead>
+        <tr>
+            <th>TASK</th>
+            <th>STARTING TIME</th>
+            <th>FINISHING TIME</th>
+        </tr>
+        </thead>
+        <tbody id="todoListBody"></tbody>
+    </table>
 
-        </a>
-    </div>
-    <div class="add">
-        <h1 class="todo">To-Do List</h1>
-        <p class="intro">task starting </p>
-        <ul id="todoList"></ul>
-
-        <input id="input" type="text" class="taskInput" placeholder="Add a new task">
-       <p class="start">Date to start task </p>
-        <input id="inputT" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
-        <p class="start">Date to end task</p>
-        <input id="inputE" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
-        <button type="button" class="addBtn" onclick="createTodoList()">ADD</button>
-
-        <input type="text" class="taskInput" placeholder="Add a new task">
-        <button class="addBtn" onclick="createNewTask">ADD</button>
-
-    </div>
-
-
+    <label for="input"></label><input id="input" type="text" class="taskInput" placeholder="Add a new task">
+    <p class="start">Date to start task </p>
+    <label for="inputT"></label><input id="inputT" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
+    <p class="start">Date to end task</p>
+    <label for="inputE"></label><input id="inputE" type="datetime-local" class="taskInput" placeholder="Add a new task" required>
+    <button type="button" class="addBtn" onclick="createTodoList()">ADD</button>
+    <div class="errorContainer"></div>
+</div>
 </body>
 </html>

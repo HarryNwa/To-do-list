@@ -1,4 +1,4 @@
-package org.harry.todolist.dto;
+package org.harry.todolist.dto.request;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -11,5 +11,6 @@ public class UpdateTaskRequest {
     private LocalDateTime taskDate;
     private String oldDescription;
     private String newDescription;
+    private String completedTask;
     private LocalDateTime completionDate;
 }

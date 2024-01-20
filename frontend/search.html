@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="update..css">
+    <link rel="stylesheet" href="all.css">
+    <script src="index.js"></script>
 </head>
-    <div class="homeDiv">
-        <a href="index.html">
-            <img src="./asset/icons8-home-500.png" alt="home">
+        <body>
+            <div class="add">
+                <div class="update">
+                    <a href="index.html">
+                        <h1 class="todo">TaskForge</h1>
+                    </a>
+                    <input type="text" class="taskInput" placeholder="Search for task">
+                    <button class="searchBtn" onclick="searchForTask()">Search</button>
+                </div>
+                <div class="errorContainer"></div>
+                <div class="resultContainer" style="display: none;">
+            </div>
+       </body>
 
-        </a>
-    </div>
-<body>
-    <div class="update">
-        <h1 class="todo">Search To-Do List</h1>
-        <input type="text" class="taskInput" placeholder="Search by description">
-        <button class="searchBtn" onclick="searchAndUpdate()">Search</button>
-    </div>
-
-</body>
 </html>
