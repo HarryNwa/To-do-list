@@ -49,9 +49,14 @@ public class TaskController {
             return e.getMessage();
         }
     }
+
     @GetMapping("/getAllTask")
     public ApiRespond<Object> getAllTask(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "10") int pageSize) {
+
+    @GetMapping("/findAll")
+    public Iterable<Task> findAllCompletedTask(){
+
         try {
             List<Task> tasks = toDoListService.getAllTasks(page, pageSize);
             return new ApiRespond<>(tasks);

@@ -26,9 +26,40 @@ public class ToDoListServiceImpl implements ToDoListService {
 
 
     @Override
+
     public Task createNewTask(CreateTaskRequest createTaskRequest)  {
         validate(createTaskRequest.getDescription());
         return toDoListRepo.save(map(createTaskRequest));
+
+
+    public Task createNewTask(CreateTaskRequest createTaskRequest) {
+        Task task = new Task();
+
+        toDoListRepo.save(task);
+        validate(createTaskRequest.getDescription(),createTaskRequest.getId());
+        task.setDescription(createTaskRequest.getDescription());
+        task.setId(createTaskRequest.getId());
+        task.setTaskTime(LocalDateTime.now());
+        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
+        getCurrentFormattedDateTime();
+
+        task.setTaskTime(createTaskRequest.getTaskDate());
+        task.setCompletionDateTime(LocalDateTime.now());
+        task.setCompletedTask(String.valueOf(createTaskRequest.getCompletionDate()));
+
+        return toDoListRepo.save(task);
+
+//        else{
+//            throw new NullPointerException("description or id exist already");
+//        }
+//        validate(createTaskRequest.getDescription(),createTaskRequest.getId()) ;
+//        task.setDescription(createTaskRequest.getDescription());
+//        task.setId(createTaskRequest.getId());
+//        task.setTaskTime(createTaskRequest.getTaskDate());
+//        task.setCompletionDateTime(createTaskRequest.getCompletionDate());
+//        getCurrentFormattedDateTime();
+//
+//        return toDoListRepo.save(task);
 
 
     }
@@ -62,6 +93,20 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     public List<Task> findAllCompletedTask() {
+
+        List <Task> allTask = toDoListRepo.findAll();
+        List <Task> completedTask = new ArrayList<>();
+        for (Task task : allTask){
+            if (isTaskComplete(task.getDescription())){
+                completedTask.add(task);
+
+            }
+        }
+        if (!completedTask.isEmpty()) {
+            return completedTask;
+        } else {
+            throw new RuntimeException("No completed tasks found");
+        
         List<Task> allTask = completedTaskRepo.findAll();
         if (allTask.isEmpty()){
             throw new RuntimeException("Task not found. Task either never created or not completed");
@@ -126,7 +171,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         String completedTask = task.getCompletedTask();
         if (task.getCompletionDate() != null && completedTask != null){
             if(completed.isBefore(LocalDateTime.now())){
-                completedTaskRepo.save(task);
+//                toDoListRepo.save(task);
                return true;
 
             }
